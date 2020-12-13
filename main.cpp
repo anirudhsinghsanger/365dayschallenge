@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  max min element in an array
+//  reverse array
 //
 //  Created by Anirudh on 12/13/20.
 //
@@ -9,53 +9,32 @@
 
 using namespace std;
 
-struct Pair
+void reversearray(int arr[], int start, int end)
 {
-    int min;
-    int max;
-};
-struct Pair getMinMax(int arr[],int n)
-{
-    struct Pair minmax;
-    int i;
+    if(start>=end)
+        return;
+    int temp= arr[start];
+    arr[start]= arr[end];
+    arr[end]=temp;
     
-    if(n==1)
+    reversearray(arr, start+1, end-1);
+}
+void printarray(int arr[], int size)
+{
+    for(int i=0;i<size;i++)
     {
-        minmax.min=arr[0];
-        minmax.max=arr[0];
-        return minmax;
-    }
-    if(arr[0]>arr[1])
-    {
-        minmax.min=arr[0];
-        minmax.max=arr[1];
-    }
-    else
-    {
-        minmax.min=arr[1];
-        minmax.max=arr[0];
-    }
-    for(i=2;i<n;i++)
-    {
-        if(arr[i]>minmax.max)
-        {
-            minmax.max=arr[i];
-        }
-        else if (arr[i]<minmax.min)
-        {
-            minmax.min=arr[i];
-        }
+        cout<<arr[i]<<" ";
         
     }
-    return minmax;
+    cout<<endl;
 }
-    int main()
-    {
-        int arr[]={1000,11,445,1,330,3000};
-        int arr_size=sizeof(arr)/sizeof(arr[0]);
-        struct Pair minmax= getMinMax(arr,arr_size);
-        cout<<"minimum element is "<<minmax.min<<endl;
-        cout<<"maximum element is "<<minmax.max<<endl;
-    }
-    
-
+int main()
+{
+    int arr[]={1,2,3,4,5,6};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    printarray(arr, n);
+    reversearray(arr,0,n-1);
+    cout<<"reversed array is ";
+    printarray(arr, n);
+    return 0;
+}
